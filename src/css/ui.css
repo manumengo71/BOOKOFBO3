@@ -1,11 +1,6 @@
-/**
- * ui.css
- * Component-specific styles: header, reels, stats, leaderboard,
- * multiplayer, controls cards, and win banner.
- * BOOKOFBO3 - Futuristic Military Slot Engine
- */
+/* ui.css — BOOKOFBO3 — Component styles */
 
-/* ─── Loading Screen ────────────────────────────────────────── */
+/* ── Loading Screen ── */
 #loading-screen {
     position: fixed;
     inset: 0;
@@ -15,28 +10,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 32px;
+    gap: 28px;
 }
 
 .loading-logo {
     font-family: var(--font-hud);
-    font-size: clamp(28px, 5vw, 52px);
+    font-size: clamp(28px, 5vw, 54px);
     font-weight: 900;
-    letter-spacing: 0.3em;
+    letter-spacing: .3em;
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+}
+
+.loading-logo span {
     color: var(--neon-green);
-    text-shadow: var(--glow-green);
 }
 
 .loading-sub {
     font-family: var(--font-mono);
     font-size: 11px;
-    letter-spacing: 0.3em;
+    letter-spacing: .25em;
     color: var(--text-dim);
     text-transform: uppercase;
+    text-align: center;
 }
 
 .loading-bar-track {
-    width: 300px;
+    width: 280px;
     height: 3px;
     background: var(--border-dim);
     border-radius: 2px;
@@ -45,25 +45,26 @@
 
 #loading-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
     border-radius: 2px;
-    box-shadow: 0 0 8px var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-purple);
     width: 0;
 }
 
 .loading-status {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
+    font-size: 9px;
+    letter-spacing: .2em;
     color: var(--text-dim);
+    text-transform: uppercase;
 }
 
-/* ─── Header Card ───────────────────────────────────────────── */
+/* ── Header ── */
 .header-card {
     background: var(--bg-panel);
     border: 1px solid var(--border-dim);
-    border-top: 2px solid var(--neon-green);
-    padding: 18px 24px;
+    border-top: 2px solid var(--neon-purple);
+    padding: 16px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -77,21 +78,30 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0, 255, 157, 0.03) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(155, 0, 255, .04) 0%, transparent 60%);
     pointer-events: none;
 }
 
 .header-logo {
     font-family: var(--font-hud);
-    font-size: clamp(18px, 3vw, 28px);
+    font-size: clamp(18px, 3vw, 26px);
     font-weight: 900;
-    letter-spacing: 0.25em;
+    letter-spacing: .25em;
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+}
+
+.header-logo span {
     color: var(--neon-green);
     text-shadow: var(--glow-green);
 }
 
-.header-logo span {
-    color: var(--neon-cyan);
+.header-center {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
 }
 
 .header-meta {
@@ -103,7 +113,7 @@
 
 .header-version {
     font-size: 9px;
-    letter-spacing: 0.2em;
+    letter-spacing: .2em;
     color: var(--text-dim);
 }
 
@@ -112,7 +122,7 @@
     align-items: center;
     gap: 6px;
     font-size: 10px;
-    letter-spacing: 0.15em;
+    letter-spacing: .12em;
     color: var(--neon-green);
 }
 
@@ -125,56 +135,43 @@
     animation: corner-blink 1.5s ease-in-out infinite;
 }
 
-/* ─── Stats Card ────────────────────────────────────────────── */
-.stats-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.jackpot-section {
-    margin-top: 8px;
-}
-
-.jackpot-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: var(--text-dim);
-}
-
-.jackpot-amount {
-    color: var(--neon-amber);
-    font-family: var(--font-hud);
-}
-
-/* ─── Game Card / Reels ─────────────────────────────────────── */
+/* ── Game Card ── */
 #game-card {
-    background: linear-gradient(180deg, #0e1825 0%, var(--bg-card) 100%);
-    border-color: #1e3040;
+    background: linear-gradient(180deg, #0d0a1f 0%, var(--bg-card) 100%);
+    border-color: #1e1540;
 }
 
+.sym-legend {
+    font-size: 9px;
+    letter-spacing: .08em;
+    color: var(--text-dim);
+    padding: 6px 0 2px;
+}
+
+.legend-item {
+    display: block;
+}
+
+/* ── Reels Wrapper ── */
 .reels-wrapper {
     position: relative;
-    background: #070d18;
-    border: 1px solid #1a2e42;
+    background: #050310;
+    border: 1px solid #1c1438;
     border-radius: var(--radius-md);
-    padding: 16px;
+    padding: 14px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
-/* Reel machine top/bottom chrome lines */
 .reels-wrapper::before,
 .reels-wrapper::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-    opacity: 0.4;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+    opacity: .35;
 }
 
 .reels-wrapper::before {
@@ -185,59 +182,59 @@
     bottom: 0;
 }
 
-/* Win line center indicator */
 .win-line-indicator {
     position: absolute;
-    left: 12px;
-    right: 12px;
+    left: 10px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0, 207, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(191, 95, 255, .25), transparent);
     pointer-events: none;
 }
 
 #reels-grid {
     display: flex;
-    gap: 8px;
-    justify-content: center;
+    gap: 7px;
 }
 
 .reel-column {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
     flex: 1;
     min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
 }
 
 .reel-cell {
     aspect-ratio: 1;
-    background: var(--bg-panel);
-    border: 1px solid #1e3040;
+    background: #0a0719;
+    border: 1px solid #1c1438;
     border-radius: var(--radius-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    cursor: default;
-    transition: border-color 0.2s;
+    gap: 3px;
     position: relative;
     overflow: hidden;
     padding: 6px;
+    cursor: default;
+    transition: border-color .2s;
 }
 
 .reel-cell::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(191, 95, 255, .03) 0%, transparent 100%);
 }
 
 .symbol-icon {
-    width: 60%;
-    height: 60%;
+    width: 58%;
+    height: 58%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -251,23 +248,23 @@
 
 .symbol-label {
     font-family: var(--font-hud);
-    font-size: 7px;
-    letter-spacing: 0.1em;
+    font-size: 6px;
+    letter-spacing: .1em;
     color: var(--text-dim);
     text-transform: uppercase;
     line-height: 1;
 }
 
-/* ─── Win Banner ────────────────────────────────────────────── */
+/* ── Win Banner ── */
 .win-banner {
     text-align: center;
-    padding: 14px;
+    padding: 13px;
     border-radius: var(--radius-sm);
     font-family: var(--font-hud);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 900;
-    letter-spacing: 0.15em;
-    margin: 12px 0;
+    letter-spacing: .14em;
+    margin: 8px 0;
 }
 
 .win-banner.hidden {
@@ -275,62 +272,162 @@
 }
 
 .small-win-banner {
-    background: rgba(0, 255, 157, 0.08);
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
-    text-shadow: var(--glow-green);
+    background: rgba(191, 95, 255, .08);
+    border: 1px solid var(--neon-purple);
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
 }
 
 .big-win-banner {
-    background: rgba(0, 255, 157, 0.12);
-    border: 2px solid var(--neon-green);
-    color: var(--neon-green);
-    text-shadow: var(--glow-green);
-    font-size: 20px;
+    background: rgba(191, 95, 255, .14);
+    border: 2px solid var(--neon-purple);
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+    font-size: 18px;
 }
 
-/* ─── Spin Button ───────────────────────────────────────────── */
+/* ── Spin Button ── */
 #spin-btn {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
-    padding: 18px;
-    margin-top: 8px;
+    padding: 16px;
     border-width: 2px;
-    border-color: var(--neon-green);
-    color: var(--neon-green);
-    letter-spacing: 0.2em;
-    background: rgba(0, 255, 157, 0.04);
+    border-color: var(--neon-purple);
+    color: var(--neon-purple);
+    letter-spacing: .2em;
+    background: rgba(191, 95, 255, .04);
 }
 
 #spin-btn:hover:not(:disabled) {
-    background: rgba(0, 255, 157, 0.14);
-    box-shadow: var(--glow-green), 0 0 60px rgba(0, 255, 157, 0.15);
+    background: rgba(191, 95, 255, .14);
+    box-shadow: var(--glow-purple), 0 0 60px rgba(191, 95, 255, .12);
     transform: translateY(-1px);
 }
 
-/* Cost info */
 .spin-cost-label {
     text-align: center;
-    font-size: 9px;
-    letter-spacing: 0.2em;
+    font-size: 8px;
+    letter-spacing: .15em;
     color: var(--text-dim);
-    margin-top: 6px;
+    margin-top: 5px;
 }
 
-/* ─── Leaderboard Card ──────────────────────────────────────── */
+/* Free spins counter */
+.fs-counter-label {
+    font-family: var(--font-hud);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+    text-align: center;
+    min-height: 18px;
+    margin-top: 4px;
+}
+
+/* ── Free Spins Overlay ── */
+#fs-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(3, 1, 8, .88);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fs-overlay.hidden {
+    display: none;
+}
+
+.fs-modal {
+    background: #0d0a1f;
+    border: 2px solid var(--neon-purple);
+    border-radius: var(--radius-lg);
+    padding: 40px 48px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 0 80px rgba(191, 95, 255, .4), 0 0 200px rgba(155, 0, 255, .15);
+}
+
+.fs-title {
+    font-family: var(--font-hud);
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: .15em;
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+}
+
+.fs-sub {
+    font-size: 9px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+.fs-sub-label {
+    font-size: 9px;
+    letter-spacing: .1em;
+    color: var(--text-dim);
+    display: block;
+    margin-top: 4px;
+}
+
+#fs-sym-preview {
+    margin: 4px 0;
+}
+
+.fs-sym-name-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#fs-sym-name {
+    font-family: var(--font-hud);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--text-bright);
+}
+
+.fs-count {
+    font-family: var(--font-hud);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
+    letter-spacing: .1em;
+}
+
+.fs-btn {
+    margin-top: 8px;
+    font-size: 13px;
+    padding: 14px 28px;
+    border-width: 2px;
+}
+
+/* ── Leaderboard ── */
 #leaderboard-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
 }
 
 .lb-entry {
     display: grid;
-    grid-template-columns: 28px 1fr auto auto;
-    gap: 8px;
+    grid-template-columns: 24px 1fr auto auto;
+    gap: 7px;
     align-items: center;
-    padding: 8px 10px;
+    padding: 7px 9px;
     background: var(--bg-panel);
     border: 1px solid var(--border-dim);
     border-radius: var(--radius-sm);
@@ -342,13 +439,13 @@
 }
 
 .lb-top {
-    border-color: rgba(245, 166, 35, 0.4);
-    background: rgba(245, 166, 35, 0.05);
+    border-color: rgba(245, 166, 35, .4);
+    background: rgba(245, 166, 35, .05);
 }
 
 .lb-rank {
     font-family: var(--font-hud);
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text-dim);
 }
 
@@ -358,9 +455,9 @@
 
 .lb-name {
     font-family: var(--font-hud);
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text-bright);
-    letter-spacing: 0.05em;
+    letter-spacing: .05em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -368,13 +465,13 @@
 
 .lb-score {
     font-family: var(--font-hud);
-    font-size: 11px;
-    color: var(--neon-green);
+    font-size: 10px;
+    color: var(--neon-purple);
     font-weight: 700;
 }
 
 .lb-date {
-    font-size: 9px;
+    font-size: 8px;
     color: var(--text-dim);
 }
 
@@ -385,47 +482,47 @@
     padding: 16px;
 }
 
-/* ─── Multiplayer Card ──────────────────────────────────────── */
+/* ── Multiplayer Card ── */
 .mp-scoreboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 7px;
+    margin-bottom: 10px;
 }
 
 .mp-player-box {
     background: var(--bg-panel);
     border: 1px solid var(--border-dim);
     border-radius: var(--radius-sm);
-    padding: 12px;
+    padding: 11px;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
-.mp-player-box.mp-self {
-    border-color: rgba(0, 255, 157, 0.2);
+.mp-self {
+    border-color: rgba(191, 95, 255, .25);
 }
 
-.mp-player-box.mp-opp {
-    border-color: rgba(255, 60, 110, 0.2);
+.mp-opp {
+    border-color: rgba(255, 34, 85, .2);
 }
 
 .mp-player-name {
     font-family: var(--font-hud);
     font-size: 9px;
-    letter-spacing: 0.15em;
+    letter-spacing: .15em;
     color: var(--text-dim);
     text-transform: uppercase;
 }
 
 .mp-player-credits {
     font-family: var(--font-hud);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 900;
-    color: var(--neon-green);
-    text-shadow: var(--glow-green);
+    color: var(--neon-purple);
+    text-shadow: var(--glow-purple);
 }
 
 .mp-opp .mp-player-credits {
@@ -437,117 +534,71 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 #mp-timer {
     font-family: var(--font-hud);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
     color: var(--neon-cyan);
     text-shadow: var(--glow-cyan);
-    letter-spacing: 0.1em;
+    letter-spacing: .1em;
 }
 
 .mp-status-badge {
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    padding: 3px 10px;
+    font-size: 8px;
+    letter-spacing: .15em;
+    padding: 3px 9px;
     border-radius: 2px;
     font-family: var(--font-hud);
 }
 
 .status-online {
-    background: rgba(0, 255, 157, 0.1);
+    background: rgba(57, 255, 20, .08);
     border: 1px solid var(--neon-green);
     color: var(--neon-green);
 }
 
 .status-offline {
-    background: rgba(255, 60, 110, 0.1);
-    border: 1px solid rgba(255, 60, 110, 0.4);
+    background: rgba(255, 34, 85, .08);
+    border: 1px solid rgba(255, 34, 85, .4);
     color: var(--neon-red);
 }
 
 .mp-room-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: 7px;
+    margin-bottom: 5px;
 }
 
 #mp-room-code-display {
     flex: 1;
     background: var(--bg-input);
     border: 1px solid var(--border-dim);
-    padding: 8px 12px;
+    padding: 7px 10px;
     border-radius: var(--radius-sm);
     font-family: var(--font-hud);
-    font-size: 12px;
-    letter-spacing: 0.15em;
+    font-size: 11px;
+    letter-spacing: .15em;
     color: var(--neon-amber);
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #mp-notification {
-    background: rgba(0, 207, 255, 0.08);
-    border: 1px solid rgba(0, 207, 255, 0.3);
-    color: var(--neon-cyan);
+    background: rgba(191, 95, 255, .08);
+    border: 1px solid rgba(191, 95, 255, .3);
+    color: var(--neon-purple);
     text-align: center;
-    padding: 8px 12px;
+    padding: 7px 11px;
     border-radius: var(--radius-sm);
     font-size: 10px;
-    letter-spacing: 0.1em;
-    margin-top: 8px;
+    letter-spacing: .08em;
+    margin-top: 7px;
 }
 
 #mp-notification.hidden {
     display: none;
-}
-
-/* ─── Controls Card ─────────────────────────────────────────── */
-.controls-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.name-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.name-row .hud-input {
-    flex: 1;
-}
-
-.name-row .btn {
-    width: auto;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-
-/* ─── Corner decorators on cards ────────────────────────────── */
-.card-corner-tl,
-.card-corner-br {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-color: var(--neon-green);
-    border-style: solid;
-    opacity: 0.5;
-}
-
-.card-corner-tl {
-    top: 6px;
-    left: 6px;
-    border-width: 1px 0 0 1px;
-}
-
-.card-corner-br {
-    bottom: 6px;
-    right: 6px;
-    border-width: 0 1px 1px 0;
 }

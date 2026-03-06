@@ -4,64 +4,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="BOOKOFBO3 — Futuristic military arcade slot machine. Virtual credits only. No real gambling.">
-    <title>BOOKOFBO3 // COMBAT SLOT TERMINAL</title>
-
-    <!-- CSS -->
+    <title>BOOKOFBO3 // DR. MONTY'S MACHINE</title>
+    <meta name="description" content="BOOKOFBO3 — BO3 themed arcade slot. Virtual credits only.">
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/animations.css">
     <link rel="stylesheet" href="src/css/ui.css">
-
-    <!-- PeerJS CDN for multiplayer -->
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 
 <body>
 
-    <!-- ── Loading Screen ─────────────────────────────────────── -->
+    <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="loading-logo">BOOKOFBO3</div>
-        <div class="loading-sub">Combat Slot Terminal // Initializing...</div>
+        <div class="loading-logo">BOOK<span>OF</span>BO3</div>
+        <div class="loading-sub">DR. MONTY'S MACHINE // INITIALIZING PROTOCOL...</div>
         <div class="loading-bar-track">
             <div id="loading-bar-fill"></div>
         </div>
-        <div class="loading-status">LOADING COMBAT MODULES...</div>
+        <div class="loading-status">LOADING LIQUID DIVINIUM MODULES...</div>
     </div>
 
-    <!-- ── Glitch FX overlay ──────────────────────────────────── -->
+    <!-- Glitch Overlay -->
     <div id="glitch-overlay"></div>
 
-    <!-- ── Dashboard ─────────────────────────────────────────── -->
-    <div class="dashboard">
-
-        <!-- Header spans full width -->
-        <div id="slot-header" style="margin-bottom: 16px;"></div>
-
-        <!-- 3-column grid layout -->
-        <div class="dashboard-grid">
-
-            <!-- Left column: Stats + Leaderboard -->
-            <div class="col-left">
-                <div id="slot-controls"></div>
-                <div id="slot-leaderboard"></div>
+    <!-- Free Spins Overlay -->
+    <div id="fs-overlay" class="hidden">
+        <div class="fs-modal">
+            <div class="fs-title">⚡ LIQUID DIVINIUM ACTIVATED ⚡</div>
+            <div class="fs-sub">EXPANDING SYMBOL</div>
+            <div id="fs-sym-preview"></div>
+            <div class="fs-sym-name-wrap">
+                <span id="fs-sym-name"></span>
+                <span class="fs-sub-label">expands all reels it lands on</span>
             </div>
-
-            <!-- Center column: Main game reels -->
-            <div class="col-center">
-                <div id="slot-game"></div>
-            </div>
-
-            <!-- Right column: Multiplayer -->
-            <div class="col-right">
-                <div id="slot-multiplayer"></div>
-            </div>
-
+            <div id="fs-count-text" class="fs-count"></div>
+            <button class="btn btn-primary fs-btn" id="fs-start-btn">[ BEGIN FREE SPINS ]</button>
         </div>
     </div>
 
-    <!-- ── App Entry ──────────────────────────────────────────── -->
-    <script type="module" src="src/js/app.js"></script>
+    <!-- Dashboard -->
+    <div class="dashboard">
+
+        <!-- Header -->
+        <header class="header-card">
+            <div class="header-logo">BOOK<span>OF</span>BO3</div>
+            <div class="header-center">
+                <span class="header-sub">DR. MONTY'S MACHINE</span>
+            </div>
+            <div class="header-meta">
+                <div class="header-version">v2.0 // CLASSIFIED</div>
+                <div class="header-status"><span class="header-status-dot"></span>SYSTEM ONLINE</div>
+            </div>
+        </header>
+
+        <!-- 3-Column Grid -->
+        <div class="dashboard-grid">
+
+            <!-- LEFT: Stats + Controls -->
+            <div class="col-left">
+
+                <!-- Operator Stats Card -->
+                <div class="card">
+                    <div class="card-corner-tl"></div>
+                    <div class="card-corner-br"></div>
+                    <div class="card-header">
+                        <span class="card-icon">🎖</span>
+                        <h2 class="card-title">Operator Stats</h2>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-row">
+                            <span class="label-sm">Credits</span>
+                            <span class="value-lg" id="stat-credits">1000</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label-sm">Win Streak</span>
+                            <span class="value-md" id="stat-streak">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="label-sm">Multiplier</span>
+                            <span class="value-md" id="stat-multiplier">x1</span>
+                        </div>
+                    </div>
+                    <div id="fs-counter" class="fs-counter-label"></div>
+                    <hr class="hud-divider">
+                    <div class="name-row" style="margin-bottom:8px;">
+                        <input class="hud-input" id="player-name-input" placeholder="CALLSIGN" maxlength="12">
+                        <button class="btn btn-primary" id="btn-save-score">SAVE</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                        <button class="btn" id="btn-sound">🔊 AUDIO ON</button>
+                        <button class="btn btn-danger" id="btn-reset">⊘ RESET CREDITS</button>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="card">
+                    <div class="card-corner-tl"></div>
+                    <div class="card-corner-br"></div>
+                    <div class="card-header">
+                        <span class="card-icon">🏆</span>
+                        <h2 class="card-title">Intel Database</h2>
+                        <span class="card-badge">TOP 10</span>
+                    </div>
+                    <ul id="leaderboard-list">
+                        <li class="lb-empty">NO DATA ON FILE</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- CENTER: Game Reels -->
+            <div class="col-center">
+                <div class="card" id="game-card">
+                    <div class="card-corner-tl"></div>
+                    <div class="card-corner-br"></div>
+                    <div class="card-header">
+                        <span class="card-icon">☢</span>
+                        <h2 class="card-title">Dr. Monty's Machine</h2>
+                        <span class="card-badge">5×3 GRID</span>
+                    </div>
+
+                    <!-- Jackpot Bar -->
+                    <div class="jackpot-section">
+                        <div class="jackpot-label">
+                            <span class="label-sm">DIVINIUM CHARGE</span>
+                            <span class="jackpot-amount label-sm">CLASSIFIED</span>
+                        </div>
+                        <div class="jackpot-bar-wrap">
+                            <div id="jackpot-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Symbol legend -->
+                    <div class="sym-legend">
+                        <span class="legend-item" style="color:#bf5fff">◆ DIVINIUM = WILD + SCATTER (3+→FREE
+                            SPINS)</span>
+                    </div>
+
+                    <hr class="hud-divider">
+
+                    <!-- Win Banner -->
+                    <div id="win-banner" class="win-banner hidden"><span id="win-banner-text"></span></div>
+
+                    <!-- Reels -->
+                    <div class="reels-wrapper">
+                        <div class="win-line-indicator"></div>
+                        <div id="reels-grid"></div>
+                    </div>
+
+                    <!-- Spin Button -->
+                    <button class="btn btn-primary" id="spin-btn">[ DEPLOY SPIN ]</button>
+                    <p class="spin-cost-label">COST: 50 CREDITS // 3+ DIVINIUM = FREE SPINS</p>
+                </div>
+            </div>
+
+            <!-- RIGHT: Multiplayer -->
+            <div class="col-right">
+                <div class="card">
+                    <div class="card-corner-tl"></div>
+                    <div class="card-corner-br"></div>
+                    <div class="card-header">
+                        <span class="card-icon">⚡</span>
+                        <h2 class="card-title">Network Op Mode</h2>
+                        <span id="mp-status" class="mp-status-badge status-offline">OFFLINE</span>
+                    </div>
+
+                    <div class="mp-scoreboard">
+                        <div class="mp-player-box mp-self">
+                            <span class="mp-player-name" id="mp-my-name">YOU</span>
+                            <span class="mp-player-credits" id="mp-my-credits">1000 CR</span>
+                        </div>
+                        <div class="mp-player-box mp-opp">
+                            <span class="mp-player-name" id="mp-opp-name">---</span>
+                            <span class="mp-player-credits" id="mp-opp-credits">---</span>
+                        </div>
+                    </div>
+
+                    <div class="mp-timer-row">
+                        <span class="label-sm">TIME REMAINING</span>
+                        <span id="mp-timer">3:00</span>
+                    </div>
+
+                    <hr class="hud-divider">
+
+                    <div class="mp-room-row">
+                        <div id="mp-room-code-display">---</div>
+                        <button class="btn" id="btn-copy-code" title="Copy">⎘</button>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+                        <button class="btn btn-primary" id="btn-create-room">[ CREATE ROOM ]</button>
+                        <div style="display:flex;gap:8px;">
+                            <input class="hud-input" id="mp-join-code-input" placeholder="ROOM CODE" maxlength="12">
+                            <button class="btn" id="btn-join-room" style="width:auto;white-space:nowrap;">[ JOIN
+                                ]</button>
+                        </div>
+                    </div>
+                    <div id="mp-notification" class="hidden"></div>
+                </div>
+            </div>
+
+        </div><!-- end grid -->
+    </div><!-- end dashboard -->
+
+    <!-- Bundle (single non-module script — works with file://) -->
+    <script src="src/js/bundle.js"></script>
 </body>
 
 </html>
