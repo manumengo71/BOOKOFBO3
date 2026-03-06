@@ -30,15 +30,16 @@
     <!-- Free Spins Overlay -->
     <div id="fs-overlay" class="hidden">
         <div class="fs-modal">
-            <div class="fs-title">⚡ LIQUID DIVINIUM ACTIVATED ⚡</div>
-            <div class="fs-sub">EXPANDING SYMBOL</div>
+            <div class="fs-title" data-i18n="msg.fs_trigger">⚡ LIQUID DIVINIUM ACTIVATED ⚡</div>
+            <div class="fs-sub" data-i18n="fs.sub">EXPANDING SYMBOL</div>
             <div id="fs-sym-preview"></div>
             <div class="fs-sym-name-wrap">
                 <span id="fs-sym-name"></span>
-                <span class="fs-sub-label">expands all reels it lands on</span>
+                <span class="fs-sub-label" data-i18n="fs.expands">expands all reels it lands on</span>
             </div>
             <div id="fs-count-text" class="fs-count"></div>
-            <button class="btn btn-primary fs-btn" id="fs-start-btn">[ BEGIN FREE SPINS ]</button>
+            <button class="btn btn-primary fs-btn" id="fs-start-btn" data-i18n="btn.begin_fs">[ BEGIN FREE SPINS
+                ]</button>
         </div>
     </div>
 
@@ -69,31 +70,39 @@
                     <div class="card-corner-br"></div>
                     <div class="card-header">
                         <span class="card-icon">🎖</span>
-                        <h2 class="card-title">Operator Stats</h2>
+                        <h2 class="card-title" data-i18n="ui.op_stats">Operator Stats</h2>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-row">
-                            <span class="label-sm">Credits</span>
+                            <span class="label-sm" data-i18n="ui.credits">Credits</span>
                             <span class="value-lg" id="stat-credits">1000</span>
                         </div>
                         <div class="stat-row">
-                            <span class="label-sm">Win Streak</span>
+                            <span class="label-sm" data-i18n="ui.streak">Win Streak</span>
                             <span class="value-md" id="stat-streak">0</span>
                         </div>
                         <div class="stat-row">
-                            <span class="label-sm">Multiplier</span>
+                            <span class="label-sm" data-i18n="ui.mult">Multiplier</span>
                             <span class="value-md" id="stat-multiplier">x1</span>
                         </div>
                     </div>
                     <div id="fs-counter" class="fs-counter-label"></div>
                     <hr class="hud-divider">
                     <div class="name-row" style="margin-bottom:8px;">
-                        <input class="hud-input" id="player-name-input" placeholder="CALLSIGN" maxlength="12">
-                        <button class="btn btn-primary" id="btn-save-score">SAVE</button>
+                        <input class="hud-input" id="player-name-input" data-i18n="ui.callsign" placeholder="CALLSIGN"
+                            maxlength="12">
+                        <button class="btn btn-primary" id="btn-save-score" data-i18n="btn.save">SAVE</button>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:8px;">
-                        <button class="btn" id="btn-sound">🔊 AUDIO ON</button>
-                        <button class="btn btn-danger" id="btn-reset">⊘ RESET CREDITS</button>
+                        <button class="btn" id="btn-lang"
+                            style="background:#2a445e;color:#8ab8d0;border-color:#4a749e;">🌐 ESPAÑOL</button>
+                        <button class="btn" id="btn-sound" data-i18n="btn.sound_on">🔊 AUDIO ON</button>
+                        <button class="btn btn-danger" id="btn-reset" data-i18n="btn.reset">⊘ RESET CREDITS</button>
+                        <hr class="hud-divider">
+                        <button class="btn btn-bonus" id="btn-buy-bonus" data-i18n="btn.buy_bonus">💠 BUY BONUS — 1000
+                            CR</button>
+                        <p class="bonus-hint" data-i18n="msg.bonus_hint">Random free spins (8–25) at ×2 / ×3 / ×5
+                            multiplier</p>
                     </div>
                 </div>
 
@@ -103,11 +112,11 @@
                     <div class="card-corner-br"></div>
                     <div class="card-header">
                         <span class="card-icon">🏆</span>
-                        <h2 class="card-title">Intel Database</h2>
-                        <span class="card-badge">TOP 10</span>
+                        <h2 class="card-title" data-i18n="ui.db">Intel Database</h2>
+                        <span class="card-badge" data-i18n="ui.top10">TOP 10</span>
                     </div>
                     <ul id="leaderboard-list">
-                        <li class="lb-empty">NO DATA ON FILE</li>
+                        <li class="lb-empty" data-i18n="ui.no_data">NO DATA ON FILE</li>
                     </ul>
                 </div>
 
@@ -127,8 +136,8 @@
                     <!-- Jackpot Bar -->
                     <div class="jackpot-section">
                         <div class="jackpot-label">
-                            <span class="label-sm">DIVINIUM CHARGE</span>
-                            <span class="jackpot-amount label-sm">CLASSIFIED</span>
+                            <span class="label-sm" data-i18n="ui.divinium">DIVINIUM CHARGE</span>
+                            <span class="jackpot-amount label-sm" data-i18n="ui.classified">CLASSIFIED</span>
                         </div>
                         <div class="jackpot-bar-wrap">
                             <div id="jackpot-fill"></div>
@@ -137,7 +146,8 @@
 
                     <!-- Symbol legend -->
                     <div class="sym-legend">
-                        <span class="legend-item" style="color:#bf5fff">◆ DIVINIUM = WILD + SCATTER (3+→FREE
+                        <span class="legend-item" style="color:#bf5fff" data-i18n="msg.legend">◆ DIVINIUM = WILD +
+                            SCATTER (3+→FREE
                             SPINS)</span>
                     </div>
 
@@ -153,8 +163,8 @@
                     </div>
 
                     <!-- Spin Button -->
-                    <button class="btn btn-primary" id="spin-btn">[ DEPLOY SPIN ]</button>
-                    <p class="spin-cost-label">COST: 50 CREDITS // 3+ DIVINIUM = FREE SPINS</p>
+                    <button class="btn btn-primary" id="spin-btn" data-i18n="btn.deploy">[ DEPLOY SPIN ]</button>
+                    <p class="spin-cost-label" data-i18n="msg.cost">COST: 50 CREDITS // 3+ DIVINIUM = FREE SPINS</p>
                 </div>
             </div>
 
@@ -165,13 +175,14 @@
                     <div class="card-corner-br"></div>
                     <div class="card-header">
                         <span class="card-icon">⚡</span>
-                        <h2 class="card-title">Network Op Mode</h2>
-                        <span id="mp-status" class="mp-status-badge status-offline">OFFLINE</span>
+                        <h2 class="card-title" data-i18n="ui.mp">Network Op Mode</h2>
+                        <span id="mp-status" class="mp-status-badge status-offline"
+                            data-i18n="ui.offline">OFFLINE</span>
                     </div>
 
                     <div class="mp-scoreboard">
                         <div class="mp-player-box mp-self">
-                            <span class="mp-player-name" id="mp-my-name">YOU</span>
+                            <span class="mp-player-name" id="mp-my-name" data-i18n="ui.you">YOU</span>
                             <span class="mp-player-credits" id="mp-my-credits">1000 CR</span>
                         </div>
                         <div class="mp-player-box mp-opp">
@@ -181,7 +192,7 @@
                     </div>
 
                     <div class="mp-timer-row">
-                        <span class="label-sm">TIME REMAINING</span>
+                        <span class="label-sm" data-i18n="ui.time">TIME REMAINING</span>
                         <span id="mp-timer">3:00</span>
                     </div>
 
@@ -192,10 +203,13 @@
                         <button class="btn" id="btn-copy-code" title="Copy">⎘</button>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-                        <button class="btn btn-primary" id="btn-create-room">[ CREATE ROOM ]</button>
+                        <button class="btn btn-primary" id="btn-create-room" data-i18n="btn.create_room">[ CREATE ROOM
+                            ]</button>
                         <div style="display:flex;gap:8px;">
-                            <input class="hud-input" id="mp-join-code-input" placeholder="ROOM CODE" maxlength="12">
-                            <button class="btn" id="btn-join-room" style="width:auto;white-space:nowrap;">[ JOIN
+                            <input class="hud-input" id="mp-join-code-input" data-i18n="ui.room_code"
+                                placeholder="ROOM CODE" maxlength="12">
+                            <button class="btn" id="btn-join-room" style="width:auto;white-space:nowrap;"
+                                data-i18n="btn.join_room">[ JOIN
                                 ]</button>
                         </div>
                     </div>

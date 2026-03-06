@@ -10,7 +10,7 @@ export const SYMBOLS = [
     name: 'DRONE',
     rarity: 'legendary',
     weight: 2,
-    payouts: { 3: 500, 4: 1000, 5: 2500 },
+    payouts: { 2: 50, 3: 500, 4: 1000, 5: 2500 },
     color: '#00ff9d',
     svg: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <circle cx="32" cy="32" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -30,7 +30,7 @@ export const SYMBOLS = [
     name: 'SKULL',
     rarity: 'epic',
     weight: 5,
-    payouts: { 3: 200, 4: 400, 5: 1000 },
+    payouts: { 2: 10, 3: 200, 4: 400, 5: 1000 },
     color: '#ff3c6e',
     svg: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="32" cy="26" rx="18" ry="20" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -47,7 +47,7 @@ export const SYMBOLS = [
     name: 'HELMET',
     rarity: 'rare',
     weight: 10,
-    payouts: { 3: 100, 4: 200, 5: 500 },
+    payouts: { 2: 5, 3: 100, 4: 200, 5: 500 },
     color: '#00cfff',
     svg: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
       <path d="M14 36 Q12 20 32 14 Q52 20 50 36 L50 46 Q46 52 32 52 Q18 52 14 46 Z" fill="none" stroke="currentColor" stroke-width="2"/>

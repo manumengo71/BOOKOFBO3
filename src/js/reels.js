@@ -61,7 +61,8 @@ export function evaluateWins(grid) {
             }
         }
 
-        if (count >= 3) {
+        var minC = firstSymbol.payouts && firstSymbol.payouts[2] ? 2 : 3;
+        if (count >= minC) {
             const payout = firstSymbol.payouts[count] || 0;
             wins.push({
                 lineIndex: lineIdx,

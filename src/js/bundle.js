@@ -14,6 +14,144 @@
     var FS_MULTIPLIER = 3;
     var MAX_MULT = 5;
 
+    // ── LOCALIZATION (I18N) ──────────────────────────────────────
+    var LANG = (function () { try { return localStorage.getItem('bo3_lang') || (navigator.language.startsWith('es') ? 'es' : 'en'); } catch (e) { return 'en'; } })();
+    var I18N = {
+        en: {
+            'btn.sound_on': '🔊 AUDIO ON',
+            'btn.sound_off': '🔇 AUDIO OFF',
+            'btn.reset': '⊘ RESET CREDITS',
+            'btn.save': 'SAVE',
+            'btn.buy_bonus': '💠 BUY BONUS — 1000 CR',
+            'btn.create_room': '[ CREATE ROOM ]',
+            'btn.join_room': '[ JOIN ]',
+            'btn.deploy': '[ DEPLOY SPIN ]',
+            'btn.deploying': '[ DEPLOYING... ]',
+            'btn.free_spin': '[ FREE SPIN ]',
+            'btn.begin_fs': '[ BEGIN FREE SPINS ]',
+            'msg.nomoney': 'INSUFFICIENT CREDITS',
+            'msg.bonus_nomoney': 'NEED 1000 CREDITS TO BUY BONUS',
+            'msg.finish_spin': 'FINISH CURRENT SPIN FIRST',
+            'msg.restored': 'CREDITS RESTORED TO 1000',
+            'msg.saved': 'SCORE SAVED:',
+            'msg.enter_code': 'ENTER A ROOM CODE',
+            'msg.copied': 'CODE COPIED',
+            'msg.joined': 'JOINED:',
+            'msg.created': 'ROOM CREATED:',
+            'msg.retrigger': '🔁 RETRIGGER! +{n} FREE SPINS',
+            'msg.fs_trigger': '⚡ LIQUID DIVINIUM ACTIVATED — FREE SPINS!',
+            'msg.fs_end': '🏆 FREE SPINS ENDED — WON {n} CREDITS!',
+            'msg.win': 'WIN! +{n} CREDITS',
+            'msg.megawin': '⚡ MEGA WIN! +{n} CREDITS ⚡',
+            'msg.bonus_hint': 'Random free spins (8–25) at ×2 / ×3 / ×5 multiplier',
+            'msg.legend': '◆ DIVINIUM = WILD + SCATTER (3+→FREE SPINS)',
+            'msg.cost': 'COST: 50 CREDITS // 3+ DIVINIUM = FREE SPINS',
+            'fs.count': '{n} FREE SPINS',
+            'fs.count_mult': '{n} FREE SPINS  ×{m} MULTIPLIER',
+            'fs.sub': 'EXPANDING SYMBOL',
+            'fs.expands': 'expands all reels it lands on',
+            'ui.op_stats': 'Operator Stats',
+            'ui.credits': 'Credits',
+            'ui.streak': 'Win Streak',
+            'ui.mult': 'Multiplier',
+            'ui.callsign': 'CALLSIGN',
+            'ui.db': 'Intel Database',
+            'ui.top10': 'TOP 10',
+            'ui.divinium': 'DIVINIUM CHARGE',
+            'ui.classified': 'CLASSIFIED',
+            'ui.mp': 'Network Op Mode',
+            'ui.no_data': 'NO DATA ON FILE',
+            'ui.you': 'YOU',
+            'ui.time': 'TIME REMAINING',
+            'ui.room_code': 'ROOM CODE',
+            'ui.offline': 'OFFLINE',
+            'ui.online': 'LINKED',
+            'mp.conn': '{n} CONNECTED',
+            'mp.won': '{n} WON +{m} CR',
+            'mp.win_match': 'MATCH OVER — {n} WINS!',
+            'mp.disc': 'OPPONENT DISCONNECTED'
+        },
+        es: {
+            'btn.sound_on': '🔊 AUDIO ACTIVO',
+            'btn.sound_off': '🔇 AUDIO MUTED',
+            'btn.reset': '⊘ REINICIAR CRÉDITOS',
+            'btn.save': 'GUARDAR',
+            'btn.buy_bonus': '💠 COMPRAR BONUS — 1000 CR',
+            'btn.create_room': '[ CREAR SALA ]',
+            'btn.join_room': '[ UNIRSE ]',
+            'btn.deploy': '[ TIRAR ]',
+            'btn.deploying': '[ GIRANDO... ]',
+            'btn.free_spin': '[ TIRADA GRATIS ]',
+            'btn.begin_fs': '[ EMPEZAR TIRADAS ]',
+            'msg.nomoney': 'CRÉDITOS INSUFICIENTES',
+            'msg.bonus_nomoney': 'NECESITAS 1000 CRÉDITOS PARA EL BONUS',
+            'msg.finish_spin': 'TERMINA LA TIRADA ACTUAL PRIMERO',
+            'msg.restored': 'CRÉDITOS RESTAURADOS A 1000',
+            'msg.saved': 'PUNTUACIÓN GUARDADA:',
+            'msg.enter_code': 'INTRODUCE UN CÓDIGO',
+            'msg.copied': 'CÓDIGO COPIADO',
+            'msg.joined': 'CONECTADO:',
+            'msg.created': 'SALA CREADA:',
+            'msg.retrigger': '🔁 ¡RETRIGGER! +{n} TIRADAS GRATIS',
+            'msg.fs_trigger': '⚡ DIVINIUM LÍQUIDO ACTIVADO — ¡TIRADAS GRATIS!',
+            'msg.fs_end': '🏆 TIRADAS GRATIS TERMINADAS — ¡HAS GANADO {n} CRÉDITOS!',
+            'msg.win': '¡PREMIO! +{n} CRÉDITOS',
+            'msg.megawin': '⚡ ¡MEGA PREMIO! +{n} CRÉDITOS ⚡',
+            'msg.bonus_hint': 'Tiradas gratis aleatorias (8-25) con multiplicador ×2 / ×3 / ×5',
+            'msg.legend': '◆ DIVINIUM = COMODÍN + SCATTER (3+→TIRADAS GRATIS)',
+            'msg.cost': 'COSTE: 50 CRÉDITOS // 3+ DIVINIUM = TIRADAS GRATIS',
+            'fs.count': '{n} TIRADAS GRATIS',
+            'fs.count_mult': '{n} TIRADAS GRATIS  ×{m} MULTIPLICADOR',
+            'fs.sub': 'SÍMBOLO EXPANSIVO',
+            'fs.expands': 'se expande en todos los rodillos que cae',
+            'ui.op_stats': 'Estadísticas del Operador',
+            'ui.credits': 'Créditos',
+            'ui.streak': 'Racha Victorias',
+            'ui.mult': 'Multiplicador',
+            'ui.callsign': 'NOMBRE',
+            'ui.db': 'Base de Datos de Inteligencia',
+            'ui.top10': 'TOP 10',
+            'ui.divinium': 'CARGA DIVINIUM',
+            'ui.classified': 'CLASIFICADO',
+            'ui.mp': 'Modo de Red',
+            'ui.no_data': 'SIN DATOS ARCHIVADOS',
+            'ui.you': 'TÚ',
+            'ui.time': 'TIEMPO RESTANTE',
+            'ui.room_code': 'CÓDIGO SALA',
+            'ui.offline': 'DESCONECTADO',
+            'ui.online': 'ENLAZADO',
+            'mp.conn': '{n} CONECTADO',
+            'mp.won': '{n} GANÓ +{m} CR',
+            'mp.win_match': 'FIN PARTIDA — ¡{n} GANA!',
+            'mp.disc': 'OPONENTE DESCONECTADO'
+        }
+    };
+    function t(key, params) {
+        var str = (I18N[LANG] && I18N[LANG][key]) || (I18N['en'] && I18N['en'][key]) || key;
+        if (params) {
+            for (var k in params) str = str.replace('{' + k + '}', params[k]);
+        }
+        return str;
+    }
+
+    function updateI18nDOM() {
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                el.placeholder = t(key);
+            } else {
+                el.textContent = t(key);
+            }
+        });
+
+        var btnLang = qs('btn-lang');
+        if (btnLang) btnLang.textContent = LANG === 'es' ? '🌐 ENGLISH' : '🌐 ESPAÑOL';
+        var btnSound = qs('btn-sound');
+        if (btnSound) btnSound.textContent = soundOn ? t('btn.sound_on') : t('btn.sound_off');
+        var spinBtn = qs('spin-btn');
+        if (spinBtn) spinBtn.textContent = G.freeLeft > 0 ? t('btn.free_spin') : t('btn.deploy');
+    }
+
     // ── SVG SYMBOLS ──────────────────────────────────────────────
     var SVG = {
         divinium: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M25 10h14M26 14h12M26 14v22q0 18 6 18t6-18V14"/><ellipse cx="32" cy="44" rx="5" ry="8" fill="currentColor" opacity=".35"/><circle cx="29" cy="41" r="2" fill="currentColor" opacity=".65"/><circle cx="35" cy="36" r="1.5" fill="currentColor" opacity=".5"/><circle cx="30" cy="48" r="1" fill="currentColor" opacity=".75"/></svg>',
@@ -26,8 +164,8 @@
 
     var SYMBOLS = [
         { id: 'divinium', name: 'DIVINIUM', weight: 3, isWild: true, isScatter: true, payouts: { 2: 50, 3: 500, 4: 2000, 5: 5000 }, color: '#bf5fff', svg: SVG.divinium },
-        { id: 'gobblegum', name: 'GOBBLE GUM', weight: 6, payouts: { 3: 200, 4: 500, 5: 1500 }, color: '#ff69d4', svg: SVG.gobblegum },
-        { id: 'raygun', name: 'RAY GUN', weight: 12, payouts: { 3: 100, 4: 250, 5: 600 }, color: '#00cfff', svg: SVG.raygun },
+        { id: 'gobblegum', name: 'GOBBLE GUM', weight: 6, payouts: { 2: 10, 3: 200, 4: 500, 5: 1500 }, color: '#ff69d4', svg: SVG.gobblegum },
+        { id: 'raygun', name: 'RAY GUN', weight: 12, payouts: { 2: 5, 3: 100, 4: 250, 5: 600 }, color: '#00cfff', svg: SVG.raygun },
         { id: 'monkey_bomb', name: 'MONKEY BOMB', weight: 20, payouts: { 3: 50, 4: 120, 5: 300 }, color: '#f5a623', svg: SVG.monkey_bomb },
         { id: 'zombie', name: 'ZOMBIE', weight: 28, payouts: { 3: 25, 4: 75, 5: 200 }, color: '#39ff14', svg: SVG.zombie },
         { id: 'power_core', name: 'POWER CORE', weight: 31, payouts: { 3: 10, 4: 30, 5: 80 }, color: '#8ab8d0', svg: SVG.power_core }
@@ -67,13 +205,6 @@
         return n;
     }
 
-    function applyExpand(grid, sym) {
-        return grid.map(function (reel) {
-            var has = reel.some(function (s) { return s.id === sym.id || s.isWild; });
-            return has ? [sym, sym, sym] : reel;
-        });
-    }
-
     function evalWins(grid, mult) {
         var wins = [];
         for (var li = 0; li < WIN_LINES.length; li++) {
@@ -84,7 +215,7 @@
             for (var i = 0; i < syms.length; i++) {
                 if (syms[i].id === base.id || syms[i].isWild) { count++; pos.push({ reel: i, row: line[i] }); } else break;
             }
-            var minC = base.isScatter ? 2 : 3;
+            var minC = base.payouts && base.payouts[2] ? 2 : 3;
             if (count >= minC) {
                 var pay = (base.payouts[count] || 0) * mult;
                 if (pay > 0) wins.push({ lineIndex: li, symbol: base, count: count, payout: pay, positions: pos });
@@ -99,22 +230,50 @@
     }
 
     function doSpin(isFree) {
-        if (!isFree) { G.credits -= SPIN_COST; G.totalSpins++; G.jackpotPct = Math.min(100, G.jackpotPct + Math.random() * 3 + 0.5); }
-        else { G.freeLeft--; }
+        // NOTE: credits already deducted in executeSpin before animation starts.
+        // Only track free spin countdown here.
+        if (isFree) { G.freeLeft--; }
 
         var grid = genGrid();
         var mult = isFree ? FS_MULTIPLIER : G.multiplier;
         var expandedReels = [];
+        var wins = evalWins(grid, mult);
+        var sc = countScatter(grid);
 
         if (isFree && G.expandSym) {
-            grid = applyExpand(grid, G.expandSym);
+            var expandCount = 0;
+            var reelsWithSym = [];
             grid.forEach(function (reel, i) {
-                if (reel[0].id === G.expandSym.id) expandedReels.push(i);
+                var has = reel.some(function (s) { return s.id === G.expandSym.id; });
+                if (has) { expandCount++; reelsWithSym.push(i); }
             });
+
+            var minExp = G.expandSym.payouts && G.expandSym.payouts[2] ? 2 : 3;
+            if (expandCount >= minExp) {
+                expandedReels = reelsWithSym;
+                grid = grid.map(function (reel, i) {
+                    if (reelsWithSym.indexOf(i) > -1) {
+                        return [G.expandSym, G.expandSym, G.expandSym];
+                    }
+                    return reel;
+                });
+
+                var payPerLine = (G.expandSym.payouts[expandCount] || 0) * mult;
+                if (payPerLine > 0) {
+                    for (var li = 0; li < WIN_LINES.length; li++) {
+                        var line = WIN_LINES[li];
+                        var pos = [];
+                        for (var i = 0; i < line.length; i++) {
+                            if (reelsWithSym.indexOf(i) > -1) {
+                                pos.push({ reel: i, row: line[i] });
+                            }
+                        }
+                        wins.push({ lineIndex: li, symbol: G.expandSym, count: expandCount, payout: payPerLine, positions: pos });
+                    }
+                }
+            }
         }
 
-        var sc = countScatter(grid);
-        var wins = evalWins(grid, mult);
         var payout = wins.reduce(function (s, w) { return s + w.payout; }, 0);
         G.credits += payout; G.totalWins += payout;
 
@@ -123,7 +282,7 @@
             else { G.winStreak = 0; G.multiplier = 1; }
         } else {
             G.freeWon += payout;
-            if (sc >= 3) { var bonus = FS_BY_SCATTER[Math.min(sc, 5)] || 10; G.freeLeft += bonus; G.freeTotal += bonus; showNotif('🔁 RETRIGGER! +' + bonus + ' FREE SPINS'); }
+            if (sc >= 3) { var bonus = FS_BY_SCATTER[Math.min(sc, 5)] || 10; G.freeLeft += bonus; G.freeTotal += bonus; showNotif(t('msg.retrigger', { n: bonus })); }
         }
 
         var triggered = false;
@@ -249,13 +408,13 @@
         var mEl = qs('stat-multiplier');
         if (mEl) { mEl.textContent = 'x' + G.multiplier; mEl.className = 'value-md' + (G.multiplier > 1 ? ' mult-active' : ''); }
         var jEl = qs('jackpot-fill'); if (jEl) jEl.style.width = G.jackpotPct + '%';
-        var fsEl = qs('fs-counter'); if (fsEl) fsEl.textContent = G.freeLeft > 0 ? G.freeLeft + ' FREE SPINS' : '';
+        var fsEl = qs('fs-counter'); if (fsEl) fsEl.textContent = G.freeLeft > 0 ? t('fs.count', { n: G.freeLeft }) : '';
     }
 
     function showWin(payout, wins, isBig) {
         var banner = qs('win-banner'), txt = qs('win-banner-text'); if (!banner || !txt) return;
         clearTimeout(banner._t);
-        txt.textContent = isBig ? '⚡ MEGA WIN! +' + payout + ' CREDITS ⚡' : 'WIN! +' + payout + ' CREDENTIALS';
+        txt.textContent = isBig ? t('msg.megawin', { n: payout }) : t('msg.win', { n: payout });
         banner.className = 'win-banner ' + (isBig ? 'big-win-banner' : 'small-win-banner');
         banner.classList.remove('hidden');
         // Glow winning cells
@@ -315,7 +474,7 @@
 
     function renderLB() {
         var list = qs('leaderboard-list'); if (!list) return;
-        if (!G.leaderboard.length) { list.innerHTML = '<li class="lb-empty">NO DATA ON FILE</li>'; return; }
+        if (!G.leaderboard.length) { list.innerHTML = '<li class="lb-empty">' + t('ui.no_data') + '</li>'; return; }
         list.innerHTML = G.leaderboard.map(function (e, i) {
             return '<li class="lb-entry' + (i === 0 ? ' lb-top' : '') + '"><span class="lb-rank">#' + (i + 1) + '</span><span class="lb-name">' + e.name + '</span><span class="lb-score">' + e.credits + ' CR</span><span class="lb-date">' + e.date + '</span></li>';
         }).join('');
@@ -326,7 +485,7 @@
         var ov = qs('fs-overlay'); if (!ov) return;
         qs('fs-sym-preview').innerHTML = '<div class="symbol-icon" style="color:' + sym.color + ';width:80px;height:80px;">' + sym.svg + '</div>';
         qs('fs-sym-name').textContent = sym.name;
-        qs('fs-count-text').textContent = count + ' FREE SPINS';
+        qs('fs-count-text').textContent = t('fs.count', { n: count });
         ov.classList.remove('hidden');
         playSound('freespin');
         qs('fs-start-btn').onclick = function () {
@@ -336,8 +495,57 @@
     }
 
     function showFSEnd(totalWon) {
-        showNotif('🏆 FREE SPINS ENDED — WON ' + totalWon + ' CREDITS!');
+        showNotif(t('msg.fs_end', { n: totalWon }));
         updateStats();
+    }
+
+    // ── BUY BONUS ────────────────────────────────────────────────
+    var BONUS_COST = 1000;
+    // Possible bonus configurations — randomly selected
+    var BONUS_CONFIGS = [
+        { spins: 8, mult: 2, label: '8 spins x2' },  // small — 40% chance
+        { spins: 8, mult: 2, label: '8 spins x2' },
+        { spins: 10, mult: 3, label: '10 spins x3' },  // medium — 30% chance
+        { spins: 10, mult: 3, label: '10 spins x3' },
+        { spins: 15, mult: 3, label: '15 spins x3' },  // good — 20% chance
+        { spins: 15, mult: 3, label: '15 spins x3' },
+        { spins: 20, mult: 5, label: '20 spins x5' },  // mega — 10% chance
+        { spins: 25, mult: 5, label: '25 spins x5' },
+        { spins: 12, mult: 5, label: '12 spins x5' },
+        { spins: 8, mult: 2, label: '8 spins x2' }
+    ];
+
+    function buyBonus() {
+        if (G.credits < BONUS_COST) { showNotif(t('msg.bonus_nomoney')); return; }
+        if (spinning || G.freeLeft > 0) { showNotif(t('msg.finish_spin')); return; }
+
+        G.credits -= BONUS_COST;
+        prevCredits = G.credits + BONUS_COST; // for smooth animation from old value
+        updateStats();
+
+        // Pick a random bonus config
+        var cfg = BONUS_CONFIGS[Math.floor(Math.random() * BONUS_CONFIGS.length)];
+        G.freeLeft = cfg.spins;
+        G.freeTotal = cfg.spins;
+        G.freeWon = 0;
+        FS_MULTIPLIER = cfg.mult;
+        G.expandSym = pickExpandSym();
+
+        playSound('freespin');
+        trigGlitch();
+
+        // Show the free spins intro with the purchased config
+        var ov = qs('fs-overlay');
+        if (ov) {
+            qs('fs-sym-preview').innerHTML = '<div class="symbol-icon" style="color:' + G.expandSym.color + ';width:80px;height:80px;">' + G.expandSym.svg + '</div>';
+            qs('fs-sym-name').textContent = G.expandSym.name;
+            qs('fs-count-text').textContent = t('fs.count_mult', { n: cfg.spins, m: cfg.mult });
+            ov.classList.remove('hidden');
+            qs('fs-start-btn').onclick = function () {
+                ov.classList.add('hidden');
+                runFreeSpins();
+            };
+        }
     }
 
     // ── MULTIPLAYER ──────────────────────────────────────────────
@@ -356,7 +564,7 @@
             if (oppN) oppN.textContent = this.oppName || '---';
             if (oppC) oppC.textContent = this.oppCredits !== null ? this.oppCredits + ' CR' : '---';
             if (tim) { var m = Math.floor(this.timeLeft / 60), s = String(this.timeLeft % 60).padStart(2, '0'); tim.textContent = m + ':' + s; }
-            if (st) { st.textContent = this.connected ? 'LINKED' : 'OFFLINE'; st.className = 'mp-status-badge ' + (this.connected ? 'status-online' : 'status-offline'); }
+            if (st) { st.textContent = this.connected ? t('ui.online') : t('ui.offline'); st.className = 'mp-status-badge ' + (this.connected ? 'status-online' : 'status-offline'); }
         },
 
         sync: function (credits, wonAmt) {
@@ -373,21 +581,21 @@
             this.peer = new Peer(this.roomCode);
             this.peer.on('open', function (id) { var d = qs('mp-room-code-display'); if (d) d.textContent = id; cb && cb(id); });
             this.peer.on('connection', function (conn) { self.conn = conn; self._setup(conn); });
-            this.peer.on('error', function (e) { showNotif('PEER ERROR: ' + e.message); });
+            this.peer.on('error', function (e) { showNotif('ERROR: ' + e.message); });
         },
 
         joinRoom: function (code, cb) {
             var self = this;
-            if (typeof Peer === 'undefined') { showNotif('PEERJS NOT AVAILABLE'); return; }
+            if (typeof Peer === 'undefined') { showNotif('PEERJS ERROR'); return; }
             this.isHost = false; this.roomCode = code;
             this.peer = new Peer(null);
             this.peer.on('open', function () {
                 var conn = self.peer.connect(code);
                 self.conn = conn; self._setup(conn);
                 conn.on('open', function () { cb && cb(code); });
-                conn.on('error', function (e) { showNotif('JOIN FAILED: ' + e.message); });
+                conn.on('error', function (e) { showNotif('JOIN ERROR: ' + e.message); });
             });
-            this.peer.on('error', function (e) { showNotif('PEER ERROR: ' + e.message); });
+            this.peer.on('error', function (e) { showNotif('ERROR: ' + e.message); });
         },
 
         _setup: function (conn) {
@@ -399,14 +607,14 @@
                 if (self.isHost) self._startTimer();
             });
             conn.on('data', function (d) {
-                if (d.type === 'hello') { self.oppName = d.name; self.oppCredits = d.credits; showNotif(d.name + ' CONNECTED'); }
+                if (d.type === 'hello') { self.oppName = d.name; self.oppCredits = d.credits; showNotif(t('mp.conn', { n: d.name })); }
                 if (d.type === 'score') { self.oppCredits = d.credits; }
-                if (d.type === 'win') { showNotif((self.oppName || 'OPPONENT') + ' WON +' + d.amount + ' CR'); }
+                if (d.type === 'win') { showNotif(t('mp.won', { n: (self.oppName || 'OPP'), m: d.amount })); }
                 if (d.type === 'tick') { if (!self.isHost) { self.timeLeft = d.t; } }
-                if (d.type === 'end') { clearInterval(self.timerInt); showNotif(d.winner + ' WINS THE MATCH!'); }
+                if (d.type === 'end') { clearInterval(self.timerInt); showNotif(t('mp.win_match', { n: d.winner })); }
                 self.updateUI();
             });
-            conn.on('close', function () { self.connected = false; self.updateUI(); showNotif('OPPONENT DISCONNECTED'); });
+            conn.on('close', function () { self.connected = false; self.updateUI(); showNotif(t('mp.disc')); });
         },
 
         _startTimer: function () {
@@ -420,7 +628,7 @@
                     clearInterval(self.timerInt);
                     var winner = self.myCredits > (self.oppCredits || 0) ? self.myName : (self.oppName || 'OPPONENT');
                     self.send({ type: 'end', winner: winner });
-                    showNotif('MATCH OVER — ' + winner + ' WINS!');
+                    showNotif(t('mp.win_match', { n: winner }));
                 }
             }, 1000);
         }
@@ -431,16 +639,21 @@
 
     function executeSpin(isFree) {
         if (spinning) return;
-        if (!isFree && G.credits < SPIN_COST) { showNotif('INSUFFICIENT CREDITS'); return; }
+        if (!isFree && G.credits < SPIN_COST) { showNotif(t('msg.nomoney')); return; }
         spinning = true;
         clearWinGlow();
         var ban = qs('win-banner'); if (ban) ban.classList.add('hidden');
 
-        // Deduct immediately
-        if (!isFree) { G.credits -= SPIN_COST; updateStats(); }
+        // Deduct credits once, immediately (before animation so player sees it right away)
+        if (!isFree) {
+            G.credits -= SPIN_COST;
+            G.totalSpins++;
+            G.jackpotPct = Math.min(100, G.jackpotPct + Math.random() * 3 + 0.5);
+            updateStats();
+        }
 
         var spinBtn = qs('spin-btn');
-        if (spinBtn) { spinBtn.disabled = true; spinBtn.textContent = '[ DEPLOYING... ]'; }
+        if (spinBtn) { spinBtn.disabled = true; spinBtn.textContent = t('btn.deploying'); }
         playSound('spin');
 
         var result = doSpin(isFree);
@@ -459,13 +672,13 @@
                 mp.sync(G.credits, null);
             }
 
-            if (spinBtn) { spinBtn.disabled = false; spinBtn.textContent = G.freeLeft > 0 ? '[ FREE SPIN ]' : '[ DEPLOY SPIN ]'; }
+            if (spinBtn) { spinBtn.disabled = false; spinBtn.textContent = G.freeLeft > 0 ? t('btn.free_spin') : t('btn.deploy'); }
             spinning = false;
 
             // Trigger free spins intro
             if (result.triggered) {
                 playSound('freespin');
-                showNotif('⚡ LIQUID DIVINIUM ACTIVATED — FREE SPINS!');
+                showNotif(t('msg.fs_trigger'));
                 setTimeout(function () {
                     showFSIntro(G.expandSym, G.freeLeft, function () { runFreeSpins(); });
                 }, 1800);
@@ -484,6 +697,7 @@
 
     // ── INIT ─────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', function () {
+        updateI18nDOM();
         buildGrid();
         updateStats();
         renderLB();
@@ -509,14 +723,22 @@
             G.totalWins = 0; G.totalSpins = 0; G.jackpotPct = 0;
             G.freeLeft = 0; G.freeTotal = 0; G.expandSym = null;
             prevCredits = STARTING_CREDITS;
-            updateStats(); showNotif('CREDITS RESTORED TO 1000');
+            updateStats(); showNotif(t('msg.restored'));
+        });
+
+        // Language toggle
+        document.addEventListener('click', function (e) {
+            if (!e.target.matches('#btn-lang')) return;
+            LANG = LANG === 'en' ? 'es' : 'en';
+            try { localStorage.setItem('bo3_lang', LANG); } catch (err) { }
+            updateI18nDOM();
         });
 
         // Sound toggle
         document.addEventListener('click', function (e) {
             if (!e.target.matches('#btn-sound')) return;
             soundOn = !soundOn;
-            e.target.textContent = soundOn ? '🔊 AUDIO ON' : '🔇 AUDIO OFF';
+            e.target.textContent = soundOn ? t('btn.sound_on') : t('btn.sound_off');
         });
 
         // Save score
@@ -525,28 +747,34 @@
             var inp = qs('player-name-input');
             var name = (inp ? inp.value.trim().toUpperCase() : '') || 'GHOST';
             saveLB(name);
-            showNotif('SCORE SAVED: ' + name);
+            showNotif(t('msg.saved') + ' ' + name);
         });
 
         // Create room
         document.addEventListener('click', function (e) {
             if (!e.target.matches('#btn-create-room')) return;
-            mp.createRoom(function (code) { showNotif('ROOM CREATED: ' + code); mp.updateUI(); });
+            mp.createRoom(function (code) { showNotif(t('msg.created') + ' ' + code); mp.updateUI(); });
         });
 
         // Join room
         document.addEventListener('click', function (e) {
             if (!e.target.matches('#btn-join-room')) return;
             var inp = qs('mp-join-code-input'), code = inp ? inp.value.trim().toUpperCase() : '';
-            if (!code) { showNotif('ENTER A ROOM CODE'); return; }
-            mp.joinRoom(code, function (c) { showNotif('JOINED: ' + c); mp.updateUI(); });
+            if (!code) { showNotif(t('msg.enter_code')); return; }
+            mp.joinRoom(code, function (c) { showNotif(t('msg.joined') + ' ' + c); mp.updateUI(); });
         });
 
         // Copy room code
         document.addEventListener('click', function (e) {
             if (!e.target.matches('#btn-copy-code')) return;
             var code = qs('mp-room-code-display'); if (!code || code.textContent === '---') return;
-            navigator.clipboard.writeText(code.textContent).then(function () { showNotif('CODE COPIED'); }).catch(function () { });
+            navigator.clipboard.writeText(code.textContent).then(function () { showNotif(t('msg.copied')); }).catch(function () { });
+        });
+
+        // Buy Bonus
+        document.addEventListener('click', function (e) {
+            if (!e.target.matches('#btn-buy-bonus')) return;
+            buyBonus();
         });
     });
 

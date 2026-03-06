@@ -1,5 +1,41 @@
 /* ui.css — BOOKOFBO3 — Component styles */
 
+/* ── Buy Bonus button ── */
+.btn-bonus {
+    border-color: var(--neon-amber) !important;
+    color: var(--neon-amber) !important;
+    background: rgba(245, 166, 35, .05);
+    box-shadow: 0 0 10px rgba(245, 166, 35, .2);
+    animation: bonus-btn-pulse 2.5s ease-in-out infinite;
+}
+
+.btn-bonus:hover:not(:disabled) {
+    background: rgba(245, 166, 35, .15) !important;
+    box-shadow: 0 0 20px rgba(245, 166, 35, .5), 0 0 50px rgba(245, 166, 35, .2) !important;
+    border-color: var(--neon-amber) !important;
+    color: var(--neon-amber) !important;
+}
+
+@keyframes bonus-btn-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 8px rgba(245, 166, 35, .25);
+    }
+
+    50% {
+        box-shadow: 0 0 18px rgba(245, 166, 35, .6), 0 0 40px rgba(245, 166, 35, .2);
+    }
+}
+
+.bonus-hint {
+    font-size: 8px;
+    letter-spacing: .1em;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 3px;
+}
+
 /* ── Loading Screen ── */
 #loading-screen {
     position: fixed;
