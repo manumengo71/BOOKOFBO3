@@ -1,0 +1,42 @@
+<!-- controls-card.html — Player stats + settings controls -->
+<div class="card">
+    <div class="card-corner-tl"></div>
+    <div class="card-corner-br"></div>
+
+    <div class="card-header">
+        <span class="card-icon">🎖</span>
+        <h2 class="card-title">Operator Stats</h2>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-row">
+            <span class="label-sm">Credits</span>
+            <span class="value-lg" id="stat-credits">1000</span>
+        </div>
+        <div class="stat-row">
+            <span class="label-sm">Win Streak</span>
+            <span class="value-md" id="stat-streak">0</span>
+        </div>
+        <div class="stat-row">
+            <span class="label-sm">Multiplier</span>
+            <span class="value-md" id="stat-multiplier">x1</span>
+        </div>
+    </div>
+
+    <hr class="hud-divider">
+
+    <!-- Save Score -->
+    <div class="name-row" style="margin-bottom:8px;">
+        <input class="hud-input" id="player-name-input" placeholder="CALLSIGN" maxlength="12">
+        <button class="btn btn-primary" id="btn-save-score">SAVE</button>
+    </div>
+
+    <hr class="hud-divider">
+
+    <!-- Settings Controls -->
+    <div class="controls-grid">
+        <button class="btn" id="btn-sound">🔊 SOUND ON</button>
+        <button class="btn btn-danger" id="btn-reset">⊘ RESET CREDITS</button>
+    </div>
+</div>

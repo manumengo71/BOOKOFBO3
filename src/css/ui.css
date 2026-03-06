@@ -1,0 +1,553 @@
+/**
+ * ui.css
+ * Component-specific styles: header, reels, stats, leaderboard,
+ * multiplayer, controls cards, and win banner.
+ * BOOKOFBO3 - Futuristic Military Slot Engine
+ */
+
+/* ─── Loading Screen ────────────────────────────────────────── */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-deep);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+}
+
+.loading-logo {
+    font-family: var(--font-hud);
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+}
+
+.loading-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.loading-bar-track {
+    width: 300px;
+    height: 3px;
+    background: var(--border-dim);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#loading-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--neon-green);
+    width: 0;
+}
+
+.loading-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+}
+
+/* ─── Header Card ───────────────────────────────────────────── */
+.header-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-top: 2px solid var(--neon-green);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--radius-md);
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 157, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.header-logo {
+    font-family: var(--font-hud);
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+}
+
+.header-logo span {
+    color: var(--neon-cyan);
+}
+
+.header-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.header-version {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+}
+
+.header-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--neon-green);
+}
+
+.header-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 6px var(--neon-green);
+    animation: corner-blink 1.5s ease-in-out infinite;
+}
+
+/* ─── Stats Card ────────────────────────────────────────────── */
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.jackpot-section {
+    margin-top: 8px;
+}
+
+.jackpot-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+}
+
+.jackpot-amount {
+    color: var(--neon-amber);
+    font-family: var(--font-hud);
+}
+
+/* ─── Game Card / Reels ─────────────────────────────────────── */
+#game-card {
+    background: linear-gradient(180deg, #0e1825 0%, var(--bg-card) 100%);
+    border-color: #1e3040;
+}
+
+.reels-wrapper {
+    position: relative;
+    background: #070d18;
+    border: 1px solid #1a2e42;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    overflow: hidden;
+}
+
+/* Reel machine top/bottom chrome lines */
+.reels-wrapper::before,
+.reels-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    opacity: 0.4;
+}
+
+.reels-wrapper::before {
+    top: 0;
+}
+
+.reels-wrapper::after {
+    bottom: 0;
+}
+
+/* Win line center indicator */
+.win-line-indicator {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 207, 255, 0.3), transparent);
+    pointer-events: none;
+}
+
+#reels-grid {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.reel-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.reel-cell {
+    aspect-ratio: 1;
+    background: var(--bg-panel);
+    border: 1px solid #1e3040;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: default;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+    padding: 6px;
+}
+
+.reel-cell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+}
+
+.symbol-icon {
+    width: 60%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.symbol-icon svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 4px currentColor);
+}
+
+.symbol-label {
+    font-family: var(--font-hud);
+    font-size: 7px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+/* ─── Win Banner ────────────────────────────────────────────── */
+.win-banner {
+    text-align: center;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-hud);
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin: 12px 0;
+}
+
+.win-banner.hidden {
+    display: none;
+}
+
+.small-win-banner {
+    background: rgba(0, 255, 157, 0.08);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+}
+
+.big-win-banner {
+    background: rgba(0, 255, 157, 0.12);
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+    font-size: 20px;
+}
+
+/* ─── Spin Button ───────────────────────────────────────────── */
+#spin-btn {
+    font-size: 16px;
+    font-weight: 900;
+    padding: 18px;
+    margin-top: 8px;
+    border-width: 2px;
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    letter-spacing: 0.2em;
+    background: rgba(0, 255, 157, 0.04);
+}
+
+#spin-btn:hover:not(:disabled) {
+    background: rgba(0, 255, 157, 0.14);
+    box-shadow: var(--glow-green), 0 0 60px rgba(0, 255, 157, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Cost info */
+.spin-cost-label {
+    text-align: center;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    margin-top: 6px;
+}
+
+/* ─── Leaderboard Card ──────────────────────────────────────── */
+#leaderboard-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.lb-entry {
+    display: grid;
+    grid-template-columns: 28px 1fr auto auto;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 10px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+}
+
+.lb-entry:hover {
+    border-color: var(--border-glow);
+}
+
+.lb-top {
+    border-color: rgba(245, 166, 35, 0.4);
+    background: rgba(245, 166, 35, 0.05);
+}
+
+.lb-rank {
+    font-family: var(--font-hud);
+    font-size: 10px;
+    color: var(--text-dim);
+}
+
+.lb-top .lb-rank {
+    color: var(--neon-amber);
+}
+
+.lb-name {
+    font-family: var(--font-hud);
+    font-size: 10px;
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lb-score {
+    font-family: var(--font-hud);
+    font-size: 11px;
+    color: var(--neon-green);
+    font-weight: 700;
+}
+
+.lb-date {
+    font-size: 9px;
+    color: var(--text-dim);
+}
+
+.lb-empty {
+    color: var(--text-dim);
+    font-size: 11px;
+    text-align: center;
+    padding: 16px;
+}
+
+/* ─── Multiplayer Card ──────────────────────────────────────── */
+.mp-scoreboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.mp-player-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mp-player-box.mp-self {
+    border-color: rgba(0, 255, 157, 0.2);
+}
+
+.mp-player-box.mp-opp {
+    border-color: rgba(255, 60, 110, 0.2);
+}
+
+.mp-player-name {
+    font-family: var(--font-hud);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.mp-player-credits {
+    font-family: var(--font-hud);
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--neon-green);
+    text-shadow: var(--glow-green);
+}
+
+.mp-opp .mp-player-credits {
+    color: var(--neon-red);
+    text-shadow: var(--glow-red);
+}
+
+.mp-timer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+#mp-timer {
+    font-family: var(--font-hud);
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 0.1em;
+}
+
+.mp-status-badge {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-family: var(--font-hud);
+}
+
+.status-online {
+    background: rgba(0, 255, 157, 0.1);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+}
+
+.status-offline {
+    background: rgba(255, 60, 110, 0.1);
+    border: 1px solid rgba(255, 60, 110, 0.4);
+    color: var(--neon-red);
+}
+
+.mp-room-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+#mp-room-code-display {
+    flex: 1;
+    background: var(--bg-input);
+    border: 1px solid var(--border-dim);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-hud);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--neon-amber);
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#mp-notification {
+    background: rgba(0, 207, 255, 0.08);
+    border: 1px solid rgba(0, 207, 255, 0.3);
+    color: var(--neon-cyan);
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+}
+
+#mp-notification.hidden {
+    display: none;
+}
+
+/* ─── Controls Card ─────────────────────────────────────────── */
+.controls-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.name-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.name-row .hud-input {
+    flex: 1;
+}
+
+.name-row .btn {
+    width: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ─── Corner decorators on cards ────────────────────────────── */
+.card-corner-tl,
+.card-corner-br {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--neon-green);
+    border-style: solid;
+    opacity: 0.5;
+}
+
+.card-corner-tl {
+    top: 6px;
+    left: 6px;
+    border-width: 1px 0 0 1px;
+}
+
+.card-corner-br {
+    bottom: 6px;
+    right: 6px;
+    border-width: 0 1px 1px 0;
+}

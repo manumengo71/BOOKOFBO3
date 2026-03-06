@@ -1,0 +1,407 @@
+/**
+ * animations.css
+ * All keyframe animations and animated element states.
+ * BOOKOFBO3 - Futuristic Military Slot Engine
+ */
+
+/* ─── Scanlines Scroll ──────────────────────────────────────── */
+@keyframes scanlines-scroll {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 40px;
+    }
+}
+
+/* ─── Radar Pulse ───────────────────────────────────────────── */
+@keyframes radar-pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* ─── Reel Spin ─────────────────────────────────────────────── */
+@keyframes reel-blur-spin {
+    0% {
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+
+    15% {
+        transform: translateY(-12px);
+        filter: blur(4px);
+    }
+
+    50% {
+        transform: translateY(0);
+        filter: blur(6px);
+    }
+
+    85% {
+        transform: translateY(12px);
+        filter: blur(4px);
+    }
+
+    100% {
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
+
+.reel-column.spinning .reel-cell {
+    animation: reel-blur-spin 0.12s linear infinite;
+}
+
+/* Stagger each reel */
+.reel-column[data-reel="1"].spinning .reel-cell {
+    animation-delay: 0.02s;
+}
+
+.reel-column[data-reel="2"].spinning .reel-cell {
+    animation-delay: 0.04s;
+}
+
+.reel-column[data-reel="3"].spinning .reel-cell {
+    animation-delay: 0.06s;
+}
+
+.reel-column[data-reel="4"].spinning .reel-cell {
+    animation-delay: 0.08s;
+}
+
+/* Stopping bounce */
+@keyframes reel-stop-bounce {
+    0% {
+        transform: translateY(-8px);
+    }
+
+    50% {
+        transform: translateY(4px);
+    }
+
+    75% {
+        transform: translateY(-2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.reel-column.stopping .reel-cell {
+    animation: reel-stop-bounce 0.3s ease-out forwards;
+}
+
+/* ─── Cell Win Glow ──────────────────────────────────────────── */
+@keyframes win-pulse {
+    0% {
+        box-shadow: 0 0 0px var(--win-color, #00ff9d);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 24px var(--win-color, #00ff9d), 0 0 48px var(--win-color, #00ff9d88);
+        transform: scale(1.06);
+    }
+
+    100% {
+        box-shadow: 0 0 12px var(--win-color, #00ff9d);
+        transform: scale(1);
+    }
+}
+
+.reel-cell.cell-win {
+    animation: win-pulse 0.6s ease-in-out infinite;
+    border-color: var(--win-color, #00ff9d) !important;
+    z-index: 10;
+}
+
+/* ─── Big Win Screen Effect ──────────────────────────────────── */
+@keyframes big-win-flash {
+
+    0%,
+    100% {
+        box-shadow: none;
+    }
+
+    25% {
+        box-shadow: 0 0 60px #00ff9d66 inset, 0 0 120px #00ff9d33;
+    }
+
+    50% {
+        box-shadow: 0 0 40px #ff3c6e44 inset;
+    }
+
+    75% {
+        box-shadow: 0 0 80px #00cfff44 inset;
+    }
+}
+
+.big-win-active {
+    animation: big-win-flash 0.5s steps(1) 6;
+}
+
+/* ─── Glitch Overlay ─────────────────────────────────────────── */
+@keyframes glitch-anim {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+        background: rgba(0, 255, 157, 0.08);
+        transform: translateX(-4px);
+    }
+
+    10% {
+        background: rgba(255, 60, 110, 0.08);
+        transform: translateX(4px);
+    }
+
+    15% {
+        background: rgba(0, 207, 255, 0.05);
+        transform: translateX(0);
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#glitch-overlay.glitch-active {
+    animation: glitch-anim 0.6s ease-out forwards;
+    opacity: 1;
+}
+
+/* ─── Win Banner ─────────────────────────────────────────────── */
+@keyframes banner-slide-in {
+    from {
+        transform: translateY(-20px) scaleY(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scaleY(1);
+        opacity: 1;
+    }
+}
+
+.win-banner:not(.hidden) {
+    animation: banner-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes big-win-banner-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 12px var(--neon-green), 0 0 40px rgba(0, 255, 157, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 24px var(--neon-green), 0 0 80px rgba(0, 255, 157, 0.5);
+    }
+}
+
+.big-win-banner {
+    animation: banner-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+        big-win-banner-glow 1s ease-in-out infinite 0.3s !important;
+}
+
+/* ─── Spin Button Pulse ──────────────────────────────────────── */
+@keyframes btn-ready-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 6px rgba(0, 255, 157, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 157, 0.7), 0 0 40px rgba(0, 255, 157, 0.3);
+    }
+}
+
+#spin-btn:not(:disabled) {
+    animation: btn-ready-glow 2s ease-in-out infinite;
+}
+
+/* ─── Spin Button Busy ───────────────────────────────────────── */
+@keyframes spinning-btn-dots {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.spinning-btn {
+    animation: spinning-btn-dots 0.5s linear infinite !important;
+}
+
+/* ─── Floating Particle ──────────────────────────────────────── */
+@keyframes particle-float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-80px) translateX(var(--dx, 0));
+        opacity: 0;
+    }
+}
+
+/* ─── Counter Pulse (on credit gain) ────────────────────────── */
+@keyframes credit-flash {
+    0% {
+        color: var(--text-bright);
+    }
+
+    30% {
+        color: var(--neon-green);
+        text-shadow: var(--glow-green);
+    }
+
+    70% {
+        color: var(--neon-green);
+    }
+
+    100% {
+        color: var(--text-bright);
+    }
+}
+
+/* ─── Pulse Glow (multiplier badge) ─────────────────────────── */
+@keyframes pulse-glow {
+    from {
+        opacity: 0.7;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* ─── Loading Screen ─────────────────────────────────────────── */
+@keyframes loading-bar {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes loading-flicker {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    92% {
+        opacity: 1;
+    }
+
+    94% {
+        opacity: 0.3;
+    }
+
+    96% {
+        opacity: 1;
+    }
+
+    98% {
+        opacity: 0.5;
+    }
+}
+
+#loading-screen {
+    animation: loading-flicker 3s ease-in-out;
+}
+
+#loading-bar-fill {
+    animation: loading-bar 1.8s ease-out forwards;
+}
+
+#loading-screen.fade-out {
+    animation: fadeOut 0.8s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* ─── Card corner decorators ─────────────────────────────────── */
+@keyframes corner-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.card-corner-tl,
+.card-corner-br {
+    animation: corner-blink 3s ease-in-out infinite;
+}
+
+/* ─── Symbol icon hover ───────────────────────────────────────── */
+.reel-cell:not(.cell-win) .symbol-icon {
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.reel-cell:hover .symbol-icon {
+    filter: drop-shadow(0 0 6px currentColor);
+    transform: scale(1.05);
+}
+
+/* ─── MP notification slide ──────────────────────────────────── */
+@keyframes notif-slide {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    15% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    85% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+
+#mp-notification:not(.hidden) {
+    animation: notif-slide 3s ease-in-out forwards;
+}

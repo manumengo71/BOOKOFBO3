@@ -1,0 +1,50 @@
+<!-- multiplayer-card.html — PeerJS multiplayer session panel -->
+<div class="card">
+    <div class="card-corner-tl"></div>
+    <div class="card-corner-br"></div>
+
+    <div class="card-header">
+        <span class="card-icon">⚡</span>
+        <h2 class="card-title">Network Op Mode</h2>
+        <span id="mp-status" class="mp-status-badge status-offline">OFFLINE</span>
+    </div>
+
+    <!-- Live Scoreboard -->
+    <div class="mp-scoreboard">
+        <div class="mp-player-box mp-self">
+            <span class="mp-player-name" id="mp-my-name">YOU</span>
+            <span class="mp-player-credits" id="mp-my-credits">1000 CR</span>
+        </div>
+        <div class="mp-player-box mp-opp">
+            <span class="mp-player-name" id="mp-opp-name">---</span>
+            <span class="mp-player-credits" id="mp-opp-credits">--- CR</span>
+        </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="mp-timer-row">
+        <span class="label-sm">TIME REMAINING</span>
+        <span id="mp-timer">3:00</span>
+    </div>
+
+    <hr class="hud-divider">
+
+    <!-- Room Code Display -->
+    <div class="mp-room-row">
+        <div id="mp-room-code-display">---</div>
+        <button class="btn" id="btn-copy-code" title="Copy Code">⎘</button>
+    </div>
+
+    <!-- Create / Join -->
+    <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+        <button class="btn btn-primary" id="btn-create-room">[ CREATE ROOM ]</button>
+
+        <div style="display:flex; gap:8px;">
+            <input class="hud-input" id="mp-join-code-input" placeholder="ENTER ROOM CODE" maxlength="12">
+            <button class="btn" id="btn-join-room" style="width:auto; white-space:nowrap;">[ JOIN ]</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="mp-notification" class="hidden"></div>
+</div>

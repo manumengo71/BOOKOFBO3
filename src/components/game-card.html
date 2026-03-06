@@ -1,0 +1,39 @@
+<!-- game-card.html — Main slot machine interface -->
+<div class="card" id="game-card">
+    <div class="card-corner-tl"></div>
+    <div class="card-corner-br"></div>
+
+    <div class="card-header">
+        <span class="card-icon">🎰</span>
+        <h2 class="card-title">Combat Slot Terminal</h2>
+        <span class="card-badge">5×3 GRID</span>
+    </div>
+
+    <!-- Jackpot Progress Bar -->
+    <div class="jackpot-section">
+        <div class="jackpot-label">
+            <span class="label-sm">JACKPOT CHARGE</span>
+            <span class="jackpot-amount label-sm">CLASSIFIED</span>
+        </div>
+        <div class="jackpot-bar-wrap">
+            <div id="jackpot-fill"></div>
+        </div>
+    </div>
+
+    <hr class="hud-divider">
+
+    <!-- Win Banner -->
+    <div id="win-banner" class="win-banner hidden">
+        <span id="win-banner-text"></span>
+    </div>
+
+    <!-- Reel Grid -->
+    <div class="reels-wrapper">
+        <div class="win-line-indicator"></div>
+        <div id="reels-grid"></div>
+    </div>
+
+    <!-- Spin Button -->
+    <button class="btn btn-primary" id="spin-btn">[ DEPLOY SPIN ]</button>
+    <p class="spin-cost-label">COST: 50 CREDITS PER SPIN</p>
+</div>

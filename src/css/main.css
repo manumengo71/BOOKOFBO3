@@ -1,0 +1,347 @@
+/**
+ * main.css
+ * Global styles, design tokens, dark military HUD theme.
+ * BOOKOFBO3 - Futuristic Military Slot Engine
+ */
+
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&display=swap');
+
+/* ─── Design Tokens ────────────────────────────────────────── */
+:root {
+  --bg-deep:       #040810;
+  --bg-base:       #0a0f1c;
+  --bg-panel:      #0d1424;
+  --bg-card:       #111827;
+  --bg-input:      #0a1020;
+
+  --border-dim:    #1a2540;
+  --border-glow:   #00ff9d33;
+  --border-active: #00ff9d;
+
+  --neon-green:    #00ff9d;
+  --neon-cyan:     #00cfff;
+  --neon-red:      #ff3c6e;
+  --neon-amber:    #f5a623;
+  --neon-purple:   #bf5fff;
+
+  --text-primary:  #c8dde8;
+  --text-dim:      #4a6070;
+  --text-bright:   #e8f4ff;
+
+  --font-hud:      'Orbitron', monospace;
+  --font-mono:     'Share Tech Mono', monospace;
+
+  --radius-sm:     4px;
+  --radius-md:     8px;
+  --radius-lg:     12px;
+
+  --glow-green:    0 0 8px #00ff9d, 0 0 20px #00ff9d55;
+  --glow-cyan:     0 0 8px #00cfff, 0 0 20px #00cfff55;
+  --glow-red:      0 0 8px #ff3c6e, 0 0 20px #ff3c6e55;
+
+  --transition:    0.2s ease;
+}
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated scanlines overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 157, 0.015) 2px,
+    rgba(0, 255, 157, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+  animation: scanlines-scroll 8s linear infinite;
+}
+
+/* Radar pulse background */
+body::after {
+  content: '';
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 207, 255, 0.06);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: radar-pulse 4s ease-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Dashboard Layout ──────────────────────────────────────── */
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  grid-template-rows: auto auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.col-left  { display: flex; flex-direction: column; gap: 16px; }
+.col-center { display: flex; flex-direction: column; gap: 16px; }
+.col-right { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─── Card Panel ────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+  opacity: 0.6;
+}
+
+.card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.06);
+}
+
+/* Card header row */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.card-icon { font-size: 18px; }
+
+.card-title {
+  font-family: var(--font-hud);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--neon-green);
+  text-shadow: var(--glow-green);
+}
+
+.card-badge {
+  margin-left: auto;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  border: 1px solid var(--border-dim);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* ─── Typography ────────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--font-hud); }
+
+.label-sm {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.value-lg {
+  font-family: var(--font-hud);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--neon-green);
+  text-shadow: var(--glow-green);
+  line-height: 1;
+}
+
+.value-md {
+  font-family: var(--font-hud);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-hud);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  width: 100%;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-primary {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: rgba(0, 255, 157, 0.1);
+  box-shadow: var(--glow-green);
+}
+
+.btn-danger {
+  border-color: var(--neon-red);
+  color: var(--neon-red);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: rgba(255, 60, 110, 0.1);
+  box-shadow: var(--glow-red);
+}
+
+.btn-muted { opacity: 0.5; }
+
+/* ─── Input Fields ──────────────────────────────────────────── */
+.hud-input {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  color: var(--text-bright);
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition);
+  letter-spacing: 0.05em;
+}
+
+.hud-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.hud-input::placeholder { color: var(--text-dim); }
+
+/* ─── Dividers & separators ─────────────────────────────────── */
+.hud-divider {
+  border: none;
+  border-top: 1px solid var(--border-dim);
+  margin: 14px 0;
+}
+
+/* ─── Stat row ──────────────────────────────────────────────── */
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+/* ─── Jackpot Bar ───────────────────────────────────────────── */
+.jackpot-bar-wrap {
+  background: var(--bg-input);
+  border: 1px solid var(--border-dim);
+  border-radius: 2px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+#jackpot-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+  border-radius: 2px;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 8px var(--neon-green);
+}
+
+/* ─── Glitch overlay ────────────────────────────────────────── */
+#glitch-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+}
+
+/* ─── Win particle ──────────────────────────────────────────── */
+.win-particle {
+  position: fixed;
+  font-family: var(--font-hud);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--neon-green);
+  text-shadow: var(--glow-green);
+  pointer-events: none;
+  z-index: 9000;
+  animation: particle-float 1.2s ease-out forwards;
+}
+
+/* ─── Multiplier badge ──────────────────────────────────────── */
+.multiplier-active {
+  animation: pulse-glow 0.8s ease-in-out infinite alternate;
+  color: var(--neon-amber) !important;
+  text-shadow: 0 0 8px var(--neon-amber), 0 0 20px #f5a62355 !important;
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .col-center { grid-column: 1 / -1; order: -1; }
+}
+
+@media (max-width: 680px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .col-center { order: -1; }
+  .value-lg { font-size: 22px; }
+}
